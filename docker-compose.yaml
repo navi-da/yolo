@@ -1,69 +1,57 @@
-#This file builds the Docker images for a React/NodeJS application and runs it as microservices on Docker containers
-
-#To ensure successful execution, clone this entire repository and execute this file while in the root folder of the cloned repository
-
-#It's also a requirement to have Docker and the docker-compose plugin installed in your environment
-
-#To launch this app without having to clone the entire repository,use the docker-compose.yaml file to run the app
-
 version: "3.8"
 
 services:
 
-  #Builds the frontend Docker image and creates the frontend microservice
-  brian-yolo-client:
-    image: brianbwire/brian-yolo-client:v1.0.0
+
+      
+# Frontend
+  yolo-client:
+    image: navida/yolo_client:v1.0.0
     build: ./client
-    container_name: brian-yolo-client
-    stdin_open: true
-    tty: true
+    container_name: yolo_client
     ports:
       - "3000:3000"
     depends_on: 
-      - brian-yolo-backend
+      - yolo-backend
     networks:
-      - app-net
+      - yolo-net
 
-  #Builds the backend Docker image and creates the backend microservice
-  brian-yolo-backend:
-    image: brianbwire/brian-yolo-backend:v1.0.0
+# Backend 
+  yolo-backend:
+    image: navida/yolo_backend:v1.0.0
     build: ./backend
-    container_name: brian-yolo-backend
-    stdin_open: true
-    tty: true
-    restart: always
+    container_name: yolo_backend
     ports:
       - "5000:5000"
     depends_on: 
-      - app-ip-mongo
+      - yolo-mongo
     networks:
-      - app-net
+      - yolo-net
 
-  #Creates the database microservice
-  app-ip-mongo:
+# Creates the database microservice
+  yolo-mongo:
     image: mongo
-    container_name: app-mongo
+    container_name: yolo_mongo
     ports:
       - "27017:27017"
     networks:
-      - app-net
+      - yolo-net
     volumes:
       - type: volume
-        source: app-mongo-data
+        source: yolo_data
         target: /data/db
 
-#Creates the network infrastructure necessary for the containers to communicate with each other
 networks:
-  app-net:
-    name: app-net
+  yolo-net:
+    name: yolo_net
     driver: bridge
     attachable: true
     ipam:
       config:
-        - subnet: 172.20.0.0/16 
-          ip_range: 172.20.0.0/16 
+        - subnet: 10.20.0.0/16 
+          ip_range: 10.20.0.0/16 
 
 #Creates a Docker volume that persists all the data stored in the database
 volumes:
-  app-mongo-data:
+  yolo_data:
     driver: local
