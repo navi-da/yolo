@@ -152,4 +152,16 @@ Tag the images
 Pushed the built imags to Docker Hub
 `docker compose push`
 
+## 6. Successful running of the applications and if not, debugging measures applied.
 
+!["Docker compose"](success.png)
+
+!["Browser"](app.png)
+
+## 7.  Docker image tag naming standards for ease of identification of images and containers. 
+
+!["Docker image tags"](tags.png)
+
+## 8. Screenshot of your deployed image on DockerHub
+
+ !["Dockerhub"](hub.png)
