@@ -8,7 +8,9 @@ services:
   yolo-client:
     image: navida/yolo_client:v1.0.0
     build: ./client
-    container_name: yolo_client
+    container_name: yolo-client
+    stdin_open: true
+    tty: true
     ports:
       - "3000:3000"
     depends_on: 
@@ -16,42 +18,40 @@ services:
     networks:
       - yolo-net
 
+
 # Backend 
   yolo-backend:
-    image: navida/yolo_backend:v1.0.0
+    image: navida/yolo_backend:v1.0.2
     build: ./backend
-    container_name: yolo_backend
+    container_name: yolo-backend
     ports:
       - "5000:5000"
     depends_on: 
       - yolo-mongo
     networks:
       - yolo-net
+    restart: unless-stopped
 
 # Creates the database microservice
   yolo-mongo:
     image: mongo
-    container_name: yolo_mongo
+    container_name: yolo-mongo
     ports:
       - "27017:27017"
     networks:
       - yolo-net
     volumes:
       - type: volume
-        source: yolo_data
+        source: yolo-data
         target: /data/db
 
 networks:
   yolo-net:
-    name: yolo_net
+    name: yolo-net
     driver: bridge
     attachable: true
-    ipam:
-      config:
-        - subnet: 10.20.0.0/16 
-          ip_range: 10.20.0.0/16 
 
 #Creates a Docker volume that persists all the data stored in the database
 volumes:
-  yolo_data:
+  yolo-data:
     driver: local
