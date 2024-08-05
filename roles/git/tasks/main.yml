@@ -1,0 +1,17 @@
+---
+# tasks file for git
+- name: update apt cache
+  apt: 
+    update_cache: yes
+
+- name: install git
+  apt:
+    name: git
+    state: present
+
+- name: clone repo
+  git:
+    repo: https://github.com/navi-da/yolo.git
+    dest: devops
+    clone: yes
+    update: yes
