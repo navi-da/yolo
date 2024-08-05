@@ -10,3 +10,8 @@
     name: yolo-backend
     image: "{{ backend_image }}"
     state: started
+    ports:
+      - "5000:5000"
+    restart: true
+    networks:
+      - name: yolo-net

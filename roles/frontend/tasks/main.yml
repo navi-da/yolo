@@ -10,3 +10,9 @@
     name: yolo-client
     image: "{{ frontend_image }}"
     state: started
+    tty: true
+    ports:
+      - "3000:3000"
+    restart: true
+    networks:
+      - name: yolo-net

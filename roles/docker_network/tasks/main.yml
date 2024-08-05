@@ -1,0 +1,5 @@
+---
+# tasks file for docker_network
+- name: create docker network
+  docker_network:
+    name: yolo-net

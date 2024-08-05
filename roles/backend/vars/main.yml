@@ -1,3 +1,4 @@
 ---
 # vars file for backend
 backend_image: "navida/yolo_backend:v1.0.2"
+docker_net: "yolo-net"
