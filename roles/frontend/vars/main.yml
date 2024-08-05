@@ -1,0 +1,3 @@
+---
+# vars file for frontend
+frontend_image: "navida/yolo_client:v1.0.0"
