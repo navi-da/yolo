@@ -1,0 +1,12 @@
+---
+# tasks file for backend
+- name: pull backend image
+  docker_image:
+    name: "{{ backend_image }}"
+    source: pull
+
+- name: start backend container
+  docker_container:
+    name: yolo-backend
+    image: "{{ backend_image }}"
+    state: started
