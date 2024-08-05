@@ -4,5 +4,6 @@
   roles:
     - git
     - docker
+    - docker_network
     - frontend
     - backend
