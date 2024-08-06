@@ -5,5 +5,7 @@
     - git
     - docker
     - docker_network
+    - docker_volume
+    - database
     - frontend
     - backend
