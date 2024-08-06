@@ -1,0 +1,18 @@
+---
+# tasks file for database
+- name: pull database image
+  docker_image:
+    name: "{{ database_image }}"
+    source: pull
+
+- name: start database container
+  docker_container:
+    name: yolo-mongo
+    image: "{{ database_image }}"
+    state: started
+    ports:
+      - "27017:27017"
+    networks:
+      - name: yolo-net
+    volumes:
+      - "{{ docker_vol }}:/data/db"

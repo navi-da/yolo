@@ -1,0 +1,4 @@
+---
+# vars file for database
+database_image: "mongo:latest"
+docker_vol: "yolo-data"
