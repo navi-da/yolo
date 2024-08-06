@@ -1,0 +1,5 @@
+---
+# tasks file for docker_volume
+- name: create docker volume
+  docker_volume:
+    name: yolo-data
