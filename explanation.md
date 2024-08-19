@@ -1,24 +1,40 @@
-# Explain each role's function and positioning in the playbook (since a playbook is run sequentially) and the Ansible modules applied in the tasks contained within the roles
-## Roles functions and positioning
-The playbook is divided into the folllowing roles. The roles are run in the following order to build dependancies for the next role
-**git**
-Updates the apt cache and installs git. In addtition, it clones the repo to the devops folder in the vagrant box
-**docker**
-Installs docker
-**docker_network**
-Sets up the docker network
-**docker_volume**
-Sets up the docker volume
-**database**
-Pulls and builds the database container
-**frontend**
-Pulls and builds the client container
-**backend**
-Pulls and builds the backend container
+## Choice of the Kubernetes Objects used for deployment (Use of - or the lack of use - of StatefulSets for storage solutions).
+The frontend and backend make use of Deployment objects
+The database makes use of StatefulSet objects for persistent storage
 
-## Ansible modules used
-**apt**:to install packages
-**git**:to clone the repo
-**docker_network**:to create the docker network
-**docker_volume**:to create the docker volume
-**docker_container**:to setup and start the containers
+## Method used to expose your pods to internet traffic.
+The frontend is exposed externally through use of the LoadBalancer service type
+
+## Git workflow used to achieve the task.
+Add the backend deployment file
+`git add backend-deployment.yaml`
+`git commit -m "Add backend deployment file"`
+
+Add the backend service file
+`git add backend-service.yaml`
+`git commit -m "Add backend service file"`
+
+Add the frontend deployment file
+`git add frontend-deployment.yaml`
+`git commit -m "Add frontend deployment file"`
+
+Add the frontend service file
+`git add frontend-service.yaml`
+`git commit -m "Add frontend service file"`
+
+Add the database service file
+`git add database-service.yaml`
+`git commit -m "Add database service file"`
+
+Add the database statefulset file
+`git add database-deployment.yaml`
+`git commit -m "Add database deployment file"`
+
+Push commits to github
+`git push`
+
+## Successful running of the applications from the link provided in your github Repositorys README.md, if not the debugging measures applied.
+The application can be run by following the steps in the README file
+
+## Good practices such as Docker image tag naming standards for ease of identification and personalization of images and containers.
+!["Docker image tags"](tags.png)
