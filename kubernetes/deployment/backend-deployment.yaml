@@ -15,9 +15,5 @@ spec:
       containers:
       - name: yolo-backend
         image: navida/yolo_backend:v1.0.2
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 5000
