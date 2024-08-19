@@ -17,3 +17,5 @@ spec:
         image: navida/yolo_client:v1.0.0
         ports: 
         - containerPort: 3000
+        stdin: true
+        tty: true
