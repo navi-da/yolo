@@ -6,37 +6,30 @@ This project involved the containerization and deployment of a full-stack yolo a
 Install the docker engine here:
 - [Docker](https://docs.docker.com/engine/install/) 
 
-## How to launch the application 
-### Method 1
+## Deploy the application on kubernetes on Google Cloud
 
-- Create a docker-compose.yaml file and paste the contents of the docker-compose.yaml in the `https://github.com/navi-da/yolo.git` repository to it
+- Create and configure GKE cluster
 
-- Launch the application using docker compose up
+`gcloud container clusters create --machine-type=e2-medium --zone=africa-south1-a --disk-size=10 yolo`
+`gcloud container clusters --zone=africa-south1-a get-credentials yolo`
 
-  `docker compose up`
+- Clone the repo
 
-### Method 2
-- Clone this repository to your local machine
+`git clone https://github.com/navi-da/yolo.git`
 
-  `git clone https://github.com/navi-da/yolo.git`
+- Deploy the database
+`kubectl create -f yolo/kubernetes/service/database-service.yaml`
+`kubectl create -f kubernetes/deployment/database-deployment.yaml`
 
-- Navigate to the root directory of your cloned repository
+- Deploy the backend
+`kubectl create -f yolo/kubernetes/service/backend-service.yaml`
+`kubectl create -f yolo/kubernetes/deployment/backend-deployment.yaml`
 
-  `cd yolo`
+- Deploy the frontend
+`kubectl create -f yolo/kubernetes/service/frontend-service.yaml`
+`kubectl create -f yolo/kubernetes/deployment/frontend-deployment.yaml`
 
-- Launch the application using the docker compose command
+- Run `kubectl get service yolo-client` to obtain the IP address for the frontend
 
-  `docker compose up`
-
-## Access the application on your browser using the following URL
- `http://localhost:3000/`
-
-## How to stop the application
-- Navigate back to your terminal and press "ctrl+c" 
-
-## How to terminate the application completely
- `docker compose down`
-
-## The Docker images used in this application are sourced from this repository
-
-https://hub.docker.com/repositories/navida
+- Access the application on your browser using the following URL
+ `http://34.148.81.123:3000/`
