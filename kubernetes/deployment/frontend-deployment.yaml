@@ -4,8 +4,8 @@ metadata:
   name: yolo-client
 spec:
   selector:
-      matchLabels:
-        app: yolo-client
+    matchLabels:
+      app: yolo-client
   replicas: 3
   template:
     metadata:
@@ -13,11 +13,11 @@ spec:
         app: yolo-client
     spec:
       containers:
-        - name: yolo-client
-          image: navida/yolo_client:v1.0.0
-          ports: 
-          - containerPort: 3000
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+      - name: yolo-client
+        image: navida/yolo_client:v1.0.0
+        ports: 
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
